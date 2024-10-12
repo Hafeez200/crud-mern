@@ -18,3 +18,18 @@ mongoose.connect(mongoURI, {
   });
   
   const User = mongoose.model("User", userSchema);
+  const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+const PORT = 3000;
+
+app.get("/api/users", async (req, res) => {
+    try {
+      const users = await User.find(); // Fetch all users from MongoDB
+      res.status(200).json({ message: "Fetching all users", data: users });
+    } catch (error) {
+      res.status(500).json({ message: "An error occurred", error: error.message });
+    }
+  });
