@@ -33,3 +33,13 @@ app.get("/api/users", async (req, res) => {
       res.status(500).json({ message: "An error occurred", error: error.message });
     }
   });
+  app.post("/api/users", async (req, res) => {
+    try {
+      const { name, email, age } = req.body;
+      const newUser = new User({ name, email, age });
+      await newUser.save();
+      res.status(201).json({ message: "New user created!", data: newUser });
+    } catch (error) {
+      res.status(500).json({ message: "An error occurred", error: error.message });
+    }
+  });
