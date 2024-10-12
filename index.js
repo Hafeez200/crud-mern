@@ -69,4 +69,6 @@ app.get("/api/users", async (req, res) => {
       res.status(500).json({ message: "An error occurred", error: error.message });
     }
   });
-
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
